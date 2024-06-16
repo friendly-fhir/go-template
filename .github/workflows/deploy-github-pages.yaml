@@ -50,7 +50,7 @@ jobs:
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ steps.metadata.outputs.site_dir }}/
+          path: ${{ steps.metadata.outputs.site-dir }}/
 
   deploy:
     name: Deploy to GH Pages
