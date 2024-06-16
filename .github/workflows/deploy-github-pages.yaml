@@ -10,7 +10,7 @@ permissions:
   id-token: write
 
 jobs:
-  docs:
+  generate-documentation:
     name: Generate Documentation
     runs-on: ubuntu-latest
     steps:
@@ -21,6 +21,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
+
+      - name: Read metadata
+        id: metadata
+        run: |
+          site_dir=$(yq '.site_dir // "dist"' mkdocs.yaml)
+          echo "site-dir=${site_dir}" >> "${GITHUB_OUTPUT}"
 
       - name: Install dependencies
         run: |
@@ -37,18 +43,19 @@ jobs:
       # this.
       - name: Fix permissions
         run: |
-          find ./dist -type d -exec chmod 0755 {} \;
-          find ./dist -type f -name '.lock' -delete
+          site_dir="${{ steps.metadata.outputs.site_dir }}"
+          find "./${site_dir}" -type d -exec chmod 0755 {} \;
+          find "./${site_dir}" -type f -name '.lock' -delete
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/
+          path: ${{ steps.metadata.outputs.site_dir }}/
 
   deploy:
     name: Deploy to GH Pages
     runs-on: ubuntu-latest
-    needs: docs
+    needs: generate-documentation
 
     permissions:
       contents: read
