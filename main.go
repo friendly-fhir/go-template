@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/friendly-fhir/go-template/internal/greeting"
+)
 
 func main() {
-	fmt.Println("Hello, World!")
+	fmt.Println(greeting.New())
 }
