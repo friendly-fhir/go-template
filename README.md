@@ -12,7 +12,7 @@ Make sure to follow this handy guide when using this as a template for new
 projects. Most of this has been done for you, but there are a few things you
 should update when starting a new project.
 
-[gitter-channel]: https://matrix.to/#/#go-template:gitter.im
+[gitter-channel]: https://matrix.to/#/#friendly-fhir:gitter.im
 [docs]: https://friendly-fhir.github.io/go-template/
 [go-docs]: https://pkg.go.dev/github.com/friendly-fhir/go-template
 [github-releases]: https://github.com/friendly-fhir/go-template/releases
