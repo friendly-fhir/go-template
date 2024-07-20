@@ -44,10 +44,6 @@ jobs:
           find "./${site_dir}" -type d -exec chmod 0755 {} \;
           find "./${site_dir}" -type f -name '.lock' -delete
 
-      - name: Create CNAME record
-        run: |
-          echo "friendly-fhir.org" > "${{ steps.metadata.outputs.site-dir }}/CNAME"
-
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
